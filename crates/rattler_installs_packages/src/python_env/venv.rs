@@ -258,6 +258,8 @@ prompt = {}"#,
             .parent()
             .expect("venv exe binary should have parent folder");
 
+        println!("VENV BIN IS {:?}", venv_bin);
+
         #[cfg(not(windows))]
         {
             if !venv_exe_path.exists() {
@@ -272,7 +274,9 @@ prompt = {}"#,
 
             for bin_name in python_bins.into_iter() {
                 let venv_python_bin = venv_bin.join(bin_name);
-                if !venv_python_bin.exists() && venv_exe_path != venv_python_bin {
+                println!("SYMLINKING TO {:?}", venv_python_bin);
+                println!("EXISTS TO {:?}", venv_python_bin.is_symlink());
+                if !venv_python_bin.is_symlink()  && venv_exe_path != venv_python_bin {
                     copy_file(venv_exe_path, &venv_python_bin)?;
                 }
             }
