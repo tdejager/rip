@@ -276,7 +276,7 @@ prompt = {}"#,
                 let venv_python_bin = venv_bin.join(bin_name);
                 println!("SYMLINKING TO {:?}", venv_python_bin);
                 println!("EXISTS TO {:?}", venv_python_bin.is_symlink());
-                if !venv_python_bin.is_symlink()  && venv_exe_path != venv_python_bin {
+                if !venv_python_bin.is_symlink() && venv_exe_path != venv_python_bin {
                     copy_file(venv_exe_path, &venv_python_bin)?;
                 }
             }
